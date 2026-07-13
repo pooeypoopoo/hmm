@@ -9,7 +9,10 @@
 @font-face{font-family:"PC9800";src:url("https://dl.dropbox.com/s/q6te1rmeglfy4bf/pc-9800.ttf") format("truetype")}
 
 #os-loader{position:fixed;inset:0;background:#000;color:#f00;font-family:"PC9800";font-size:clamp(8px,2.2vw,18px);padding:30px;display:flex;justify-content:flex-start;align-items:flex-start;text-align:left;z-index:999999;box-sizing:border-box;transition:opacity 1.2s ease;overflow:hidden}
-#os-loader.finished{opacity:0;pointer-events:none}
+#os-loader.finished{
+    opacity:0;
+    pointer-events:none !important;
+}
 #terminal{width:100%;text-align:left}
 #boot-art{margin:0 0 20px;padding:0;font-family:monospace;font-size:clamp(5px,1.35vw,14px);line-height:1.1;color:#f00;white-space:pre;max-width:100%;overflow:hidden;text-shadow:0 0 8px #f00}
 .line{white-space:pre-wrap;text-align:left}
@@ -76,41 +79,66 @@ const lines=[
 "> ENTER USERNAME: gaynigga6969",
 "> PASSWORD: ********",
 "> Starting operating system... [OK]",
-"> Welcome, Vee Salunke."];
-const typingSpeed=35,loadDelay=1200,finalDelay=800;
-const terminal=document.getElementById("terminal"),loader=document.getElementById("os-loader");
+"> Welcome, Vee Salunke."
+];
+
+const typingSpeed=35;
+const loadDelay=1200;
+const finalDelay=800;
+
+const terminal=document.getElementById("terminal");
+const loader=document.getElementById("os-loader");
+
 let lineIndex=0;
 
 function typeLine(text,callback){
-const line=document.createElement("div");
-line.className="line";
-const content=document.createElement("span"),cursor=document.createElement("span");
-cursor.className="cursor";
-line.append(content,cursor);
-terminal.appendChild(line);
 
-let charIndex=0;
-const typing=setInterval(()=>{
-content.textContent+=text[charIndex++];
-if(charIndex>=text.length){
-clearInterval(typing);
-setTimeout(()=>{
-if(lineIndex<lines.length-1)cursor.remove();
-terminal.appendChild(document.createElement("br"));
-lineIndex++;
-callback();
-},loadDelay);
+    const line=document.createElement("div");
+    line.className="line";
+
+    const content=document.createElement("span");
+    const cursor=document.createElement("span");
+
+    cursor.className="cursor";
+
+    line.append(content,cursor);
+    terminal.appendChild(line);
+
+    let charIndex=0;
+    const typing=setInterval(()=>{
+        content.textContent+=text[charIndex++];
+
+        if(charIndex>=text.length){
+            clearInterval(typing);
+            setTimeout(()=>{
+                       
+                if(lineIndex<lines.length-1){
+                    cursor.remove();
+                }
+                terminal.appendChild(document.createElement("br"));
+                lineIndex++;
+                callback();
+            },loadDelay);
+        }
+    },typingSpeed);
 }
-},typingSpeed);
-}
+
 
 function nextLine(){
-if(lineIndex<lines.length)typeLine(lines[lineIndex],nextLine);
-else setTimeout(()=>{
-loader.classList.add("finished");
-setTimeout(()=>loader.remove(),1200);
-},finalDelay);
+
+    if(lineIndex<lines.length){
+        typeLine(lines[lineIndex],nextLine);
+    } else {
+        setTimeout(()=>{
+            loader.classList.add("finished");
+            loader.style.pointerEvents="none";
+            setTimeout(()=>{
+                loader.remove();
+            },1300);
+        },finalDelay);
+    }
 }
+
 
 nextLine();
 </script>
