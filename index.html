@@ -41,20 +41,24 @@ src: url("https://dl.dropbox.com/s/q6te1rmeglfy4bf/pc-9800.ttf") format("truetyp
 }
 
 #os-loader {
-position: fixed;
-inset: 0;
-background: #000;
-color: #ff0000;
-font-family: "PC9800", monospace;
-font-size: 18px;
-padding: 30px;
-display: flex;
-justify-content: flex-start;
-align-items: flex-start;
-text-align: left !important;
-z-index: 999999;
-box-sizing: border-box;
-transition: opacity 1.2s ease;
+    position: fixed;
+    inset: 0;
+    background: #000;
+    color: #ff0000;
+    font-family: "PC9800", monospace;
+
+    font-size: clamp(8px, 2.2vw, 18px);
+
+    padding: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left !important;
+    z-index: 999999;
+    box-sizing: border-box;
+    transition: opacity 1.2s ease;
+
+    overflow: hidden;
 }
 
 #os-loader.finished {
@@ -63,27 +67,21 @@ pointer-events: none;
 }
 
 #terminal {
-text-align: left !important;
-align-self: flex-start;
+    width: 100%;
+    text-align: left !important;
 }
-
 
 #boot-art {
     margin: 0 0 20px 0;
     padding: 0;
-
     font-family: monospace;
-    font-size: clamp(6px, 1.8vw, 14px);
+    font-size: clamp(5px, 1.35vw, 14px);
     line-height: 1.1;
-
     color: #ff0000;
-
     text-align: left !important;
     white-space: pre;
+    max-width: 100%;
     overflow: hidden;
-
-    display: block;
-
     text-shadow: 0 0 8px #ff0000;
 }
 
@@ -114,6 +112,19 @@ opacity: 1;
 opacity: 0;
 }
 }
+
+@media (max-width: 600px) {
+    #boot-art {
+        font-size: 4.5px;
+        transform: scaleX(0.85);
+        transform-origin: left top;
+    }
+
+    #os-loader {
+        padding: 10px;
+    }
+}
+    
 </style>
 
 
