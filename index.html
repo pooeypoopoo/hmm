@@ -127,11 +127,17 @@ function typeLine(text,callback){
 function nextLine(){
 
     if(lineIndex<lines.length){
+
         typeLine(lines[lineIndex],nextLine);
+
     } else {
+
         setTimeout(()=>{
+
             loader.classList.add("finished");
             loader.style.pointerEvents="none";
+            window.parent.postMessage("introFinished", "*");
+
             setTimeout(()=>{
                 loader.remove();
             },1300);
@@ -141,7 +147,6 @@ function nextLine(){
 
 
 nextLine();
-window.parent.postMessage("introFinished", "*");
 </script>
 
 </body>
