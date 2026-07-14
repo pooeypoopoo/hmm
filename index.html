@@ -6,32 +6,162 @@
 <title>VEGETASEI TECHNOLOGIES</title>
 
 <style>
-@font-face{font-family:"PC9800";src:url("https://dl.dropbox.com/s/q6te1rmeglfy4bf/pc-9800.ttf") format("truetype")}
 
-#os-loader{position:fixed;inset:0;background:#000;color:#f00;font-family:"PC9800";font-size:clamp(16px,2.2vw,18px);padding:30px;display:flex;justify-content:flex-start;align-items:flex-start;text-align:left;z-index:999999;box-sizing:border-box;transition:opacity 1.2s ease;overflow:hidden}
+@font-face{
+    font-family:"PC9800";
+    src:url("https://dl.dropbox.com/s/q6te1rmeglfy4bf/pc-9800.ttf") format("truetype")
+}
+
+#os-loader{
+    position:fixed;
+    inset:0;
+    background:#000;
+    color:#f00;
+    font-family:"PC9800";
+    font-size:clamp(16px,2.2vw,18px);
+    padding:30px;
+    display:flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    text-align:left;
+    z-index:999999;
+    box-sizing:border-box;
+    transition:opacity 1.2s ease;
+    overflow:hidden;
+}
+
 #os-loader.finished{
     opacity:0;
     pointer-events:none !important;
 }
-#terminal{width:100%;text-align:left}
-#boot-art{margin:0 0 20px;padding:0;font-family:monospace;font-size:clamp(11px,2.2vw,14px);line-height:1.1;color:#f00;white-space:pre;max-width:100%;overflow:hidden;text-shadow:0 0 8px #f00}
-.line{white-space:pre-wrap;text-align:left}
-.cursor{display:inline-block;width:.65em;height:1em;background:#f00;margin-left:3px;vertical-align:-2px;animation:blink-block .75s step-end infinite}
 
-@keyframes blink-block{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+#terminal{
+    width:100%;
+    text-align:left;
+    overflow:hidden;
+}
+
+
+/* NEW: keeps ASCII inside the screen */
+#boot-art-wrapper{
+    width:100%;
+    overflow:hidden;
+}
+
+
+#boot-art{
+    margin:0 0 20px;
+    padding:0;
+    font-family: monospace;
+    font-size:clamp(7px,1.5vw,14px);
+    line-height:1.05;
+    color:#f00;
+    white-space:pre;
+    max-width:100%;
+    overflow:hidden;
+    text-shadow:0 0 8px #f00;
+}
+
+
+.line{
+    white-space:pre-wrap;
+    text-align:left;
+}
+
+
+.cursor{
+    display:inline-block;
+    width:.65em;
+    height:1em;
+    background:#f00;
+    margin-left:3px;
+    vertical-align:-2px;
+    animation:blink-block .75s step-end infinite
+}
+
+
+@keyframes blink-block{
+    0%,50%{
+        opacity:1
+    }
+    50.01%,100%{
+        opacity:0
+    }
+}
+
 
 @keyframes flicker{
-0%{opacity:.27861}5%{opacity:.34769}10%{opacity:.23604}15%{opacity:.90626}20%{opacity:.18128}25%{opacity:.83891}30%{opacity:.65583}35%{opacity:.67807}40%{opacity:.26559}45%{opacity:.84693}50%{opacity:.96019}55%{opacity:.08594}60%{opacity:.20313}65%{opacity:.71988}70%{opacity:.53455}75%{opacity:.37288}80%{opacity:.71428}85%{opacity:.70419}90%{opacity:.7003}95%{opacity:.36108}100%{opacity:.24387}
+0%{opacity:.27861}
+5%{opacity:.34769}
+10%{opacity:.23604}
+15%{opacity:.90626}
+20%{opacity:.18128}
+25%{opacity:.83891}
+30%{opacity:.65583}
+35%{opacity:.67807}
+40%{opacity:.26559}
+45%{opacity:.84693}
+50%{opacity:.96019}
+55%{opacity:.08594}
+60%{opacity:.20313}
+65%{opacity:.71988}
+70%{opacity:.53455}
+75%{opacity:.37288}
+80%{opacity:.71428}
+85%{opacity:.70419}
+90%{opacity:.7003}
+95%{opacity:.36108}
+100%{opacity:.24387}
 }
 
-#os-loader::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1000000;background:linear-gradient(rgba(18,16,16,0) 50%,rgba(0,0,0,.25) 50%),linear-gradient(90deg,rgba(255,0,0,.06),rgba(0,255,0,.02),rgba(0,0,255,.06));background-size:100% 2px,3px 100%}
 
-#os-loader::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1000001;background:rgba(18,16,16,.1);animation:flicker .15s infinite}
+#os-loader::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:1000000;
+
+    background:
+    linear-gradient(
+        rgba(18,16,16,0) 50%,
+        rgba(0,0,0,.25) 50%
+    ),
+    linear-gradient(
+        90deg,
+        rgba(255,0,0,.06),
+        rgba(0,255,0,.02),
+        rgba(0,0,255,.06)
+    );
+
+    background-size:100% 2px,3px 100%;
+}
+
+
+#os-loader::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:1000001;
+    background:rgba(18,16,16,.1);
+    animation:flicker .15s infinite;
+}
+
 
 @media(max-width:600px){
-#boot-art{font-size:4.5px;transform:scaleX(.85);transform-origin:left top}
-#os-loader{padding:10px}
+
+#boot-art{
+    font-size:5px;
+    line-height:1;
 }
+
+#os-loader{
+    padding:10px;
+}
+
+}
+
 </style>
 </head>
 
@@ -39,6 +169,8 @@
 
 <div id="os-loader">
 <div id="terminal">
+
+<div id="boot-art-wrapper">
 
 <pre id="boot-art">
 ▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒▒  __     _______ ____ _____ _____  _    ____  _____ ___
@@ -56,20 +188,33 @@
 ▒▒▒▒▒▒▒▒▒▒▒▒▀▒▒▒▒▒▒▒▒▒▒▒▒                                              AUTHORIZED PERSONNEL ONLY
 
            ------------------------------------------------------------------------            
+
                                                                                                
+
            WARNING: THE FILES YOU ARE ABOUT TO VIEW CONTAINS CONFIDENTIAL RECORDS.             
+
            UNAUTHORIZED ACCESS TO THESE DOCUMENTS IS A FEDERAL CRIME. ALL ACTIVITY             
+
                      IS MONITORED AND LOGGED BY THE VEGETASEI GOVERNMENT.                      
+
                                                                                                
+
            ------------------------------------------------------------------------            
 </pre>
+
+</div>
+
 <div>VGTS BIOS (Version 1.15.01)</div>
 <div>(c) 0106 Vegetasei Technologies. All Rights Reserved.</div>
+
 <br>
+
 </div>
 </div>
 
+
 <script>
+
 const lines=[
 "> Booting system... [OK]",
 "> Initializing POST... [OK]",
@@ -82,47 +227,65 @@ const lines=[
 "> Access granted.",
 ];
 
+
 const typingSpeed=35;
 const loadDelay=1200;
 const finalDelay=800;
 
+
 const terminal=document.getElementById("terminal");
 const loader=document.getElementById("os-loader");
 
+
 let lineIndex=0;
+
 
 function typeLine(text,callback){
 
     const line=document.createElement("div");
     line.className="line";
 
+
     const content=document.createElement("span");
     const cursor=document.createElement("span");
 
     cursor.className="cursor";
 
+
     line.append(content,cursor);
     terminal.appendChild(line);
 
+
     let charIndex=0;
+
+
     const typing=setInterval(()=>{
+
         content.textContent+=text[charIndex++];
 
         if(charIndex>=text.length){
+
             clearInterval(typing);
+
+
             setTimeout(()=>{
-                       
+
+
                 if(lineIndex<lines.length-1){
                     cursor.remove();
                 }
+
                 terminal.appendChild(document.createElement("br"));
+
                 lineIndex++;
+
                 callback();
+
+
             },loadDelay);
         }
     },typingSpeed);
 }
-
 
 function nextLine(){
 
@@ -132,21 +295,36 @@ function nextLine(){
 
     } else {
 
+
         setTimeout(()=>{
 
+
             loader.classList.add("finished");
+
             loader.style.pointerEvents="none";
-            window.parent.postMessage("introFinished", "*");
+
+            window.parent.postMessage("introFinished","*");
+
+
 
             setTimeout(()=>{
+
                 loader.remove();
+
             },1300);
+
+
+
         },finalDelay);
+
     }
+
 }
 
 
 nextLine();
+
+
 </script>
 
 </body>
