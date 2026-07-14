@@ -18,7 +18,7 @@
     background:#000;
     color:#f00;
     font-family:"PC9800";
-    font-size:clamp(16px,2.2vw,18px);
+    font-size:clamp(14px,2.2vw,14px);
     padding:30px;
     display:flex;
     justify-content:flex-start;
@@ -216,21 +216,24 @@
 <script>
 
 const lines=[
-"> Booting system... [OK]",
-"> Initializing POST... [OK]",
-"> Checking for software updates... [OK]",
-"> Initiallizing secure connection...",
-"> Connection established.",
-"> System operational. Please input access key: **********",
-"> Authenticating...",
+"> Secure initialization protocol engaged.",
+"> Running internal diagnostics... [OK]",
+"> Checking classified archives... [OK]",
+"> Encryption standards verified... [OK]",
+"> Surveillance systems active.",
+"> External access restricted.",
+"> Aunthentication required. Awaiting operator authentication...",
+"> Access key accepted: **********",
+"> Verifying operator credentials...",
 "> Operator: Vee Salunke",
+"> Clearance: AUTHORIZED",
 "> Access granted.",
 ];
 
 
-const typingSpeed=35;
-const loadDelay=1200;
-const finalDelay=800;
+const typingSpeed=20;
+const loadDelay=1000;
+const finalDelay=600;
 
 
 const terminal=document.getElementById("terminal");
